@@ -1,14 +1,19 @@
-// Define LED pin
-const int ledPin = 4; // GPIO4
+const int ledPin = 4;     // GPIO4 connected to LED
+const int switchPin = 35; // GPIO35 connected to push-button (with external pull-up)
 
 void setup() {
-  // Initialize the LED pin as output
-  pinMode(ledPin, OUTPUT);
+  pinMode(ledPin, OUTPUT);        // Set LED pin as output
+  pinMode(switchPin, INPUT);      // Set switch pin as input (external pull-up required)
 }
 
 void loop() {
-  digitalWrite(ledPin, HIGH); // Turn LED on
-  delay(1000);                // Wait for 1 second
-  digitalWrite(ledPin, LOW);  // Turn LED off
-  delay(1000);                // Wait for 1 second
+  int switchState = digitalRead(switchPin); // Read the state of the switch
+
+  if (switchState == LOW) {
+    digitalWrite(ledPin, HIGH); // Turn ON LED if button is pressed (LOW)
+    delay(100)
+  } else {
+    digitalWrite(ledPin, LOW);  // Turn OFF LED if button is released (HIGH)
+    delay(100)
+  }
 }
